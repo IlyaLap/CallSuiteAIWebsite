@@ -1,12 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select } from "@/components/ui/select";
 
 const CtaSection = () => {
   return (
-    <section className="section-padding bg-primary">
+    <section id="cta-section" className="section-padding bg-primary">
       <div className="container-wide">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
