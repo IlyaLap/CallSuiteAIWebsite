@@ -3,12 +3,22 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const scrollToCTA = () => {
+    navigate('/#cta');
+    setTimeout(() => {
+      const ctaSection = document.getElementById('cta-section');
+      ctaSection?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
   return (
@@ -42,7 +52,7 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:block">
-          <Button className="bg-accent text-white hover:bg-accent/90">
+          <Button className="bg-accent text-white hover:bg-accent/90" onClick={scrollToCTA}>
             Schedule Demo
           </Button>
         </div>
@@ -98,7 +108,10 @@ const Header = () => {
             </Link>
             <Button 
               className="bg-accent text-white hover:bg-accent/90 w-full"
-              onClick={toggleMenu}
+              onClick={() => {
+                toggleMenu();
+                scrollToCTA();
+              }}
             >
               Schedule Demo
             </Button>
