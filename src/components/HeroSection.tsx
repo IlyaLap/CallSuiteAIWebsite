@@ -1,21 +1,18 @@
-
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
 const HeroSection = () => {
   const navigate = useNavigate();
-
   const scrollToCTA = () => {
     navigate('/#cta');
     setTimeout(() => {
       const ctaSection = document.getElementById('cta-section');
-      ctaSection?.scrollIntoView({ behavior: 'smooth' });
+      ctaSection?.scrollIntoView({
+        behavior: 'smooth'
+      });
     }, 100);
   };
-
-  return (
-    <section className="relative bg-gradient-to-r from-primary/10 to-primary/5 overflow-hidden">
+  return <section className="relative bg-gradient-to-r from-primary/10 to-primary/5 overflow-hidden">
       <div className="container-wide flex flex-col-reverse lg:flex-row items-center py-16 md:py-24">
         {/* Hero Content */}
         <div className="w-full lg:w-1/2 pt-10 lg:pt-0">
@@ -29,7 +26,7 @@ const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <Button onClick={scrollToCTA} className="btn-primary text-lg">
+              <Button onClick={scrollToCTA} className="btn-primary text-[FF7A50] text-slate-50 bg-[FF7A50]">
                 Schedule Your Free Demo
               </Button>
               <Button variant="outline" className="text-lg gap-2">
@@ -69,8 +66,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
