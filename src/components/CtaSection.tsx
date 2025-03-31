@@ -1,14 +1,17 @@
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useToast } from "@/hooks/use-toast";
 
 const CtaSection = () => {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { toast } = useToast();
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,14 +34,31 @@ const CtaSection = () => {
       
       if (data.success) {
         setResult("Thank you! Your demo request has been sent successfully. Our team will contact you shortly.");
-        e.currentTarget.reset();
+        // Use formRef to safely reset the form
+        if (formRef.current) {
+          formRef.current.reset();
+        }
+        toast({
+          title: "Success!",
+          description: "Your demo request has been sent successfully.",
+        });
       } else {
         console.log("Error", data);
         setResult(data.message || "Something went wrong. Please try again.");
+        toast({
+          title: "Error",
+          description: data.message || "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       setResult("An error occurred. Please try again later.");
+      toast({
+        title: "Error",
+        description: "An error occurred. Please try again later.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -88,7 +108,7 @@ const CtaSection = () => {
               </Alert>
             )}
             
-            <form onSubmit={handleSubmit}>
+            <form ref={formRef} onSubmit={handleSubmit}>
               <div className="space-y-4">
                 <div className="grid grid-cols-1 gap-4">
                   <div>
@@ -118,8 +138,9 @@ const CtaSection = () => {
                       name="business-type"
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                       required
+                      defaultValue=""
                     >
-                      <option value="" disabled selected>Select Business Type</option>
+                      <option value="" disabled>Select Business Type</option>
                       <option value="plumbing">Plumbing</option>
                       <option value="hvac">HVAC</option>
                       <option value="electrical">Electrical</option>
