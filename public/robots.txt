@@ -14,30 +14,41 @@ Allow: /contact
 Allow: /privacy
 Allow: /terms
 
+# Block certain files and directories
+Disallow: /private/
+Disallow: /admin/
+Disallow: *.pdf
+Disallow: /cgi-bin/
+
 # Sitemaps
 Sitemap: https://callsuite.ai/sitemap.xml
 
 # Crawl delay suggestion
-Crawl-delay: 10
+Crawl-delay: 5
 
-# Common bots
+# Common search engines
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 2
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 2
 
 User-agent: Slurp
 Allow: /
+Crawl-delay: 3
 
 User-agent: DuckDuckBot
 Allow: /
 
 User-agent: Baiduspider
 Allow: /
+Crawl-delay: 5
 
 User-agent: Yandex
 Allow: /
+Crawl-delay: 5
 
 # Social media bots
 User-agent: Twitterbot
