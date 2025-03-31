@@ -1,8 +1,15 @@
 
 import { PhoneCall, Focus, TrendingUp, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const BenefitsSection = () => {
+  const navigate = useNavigate();
+  
+  const navigateToHowItWorks = () => {
+    navigate('/how-it-works');
+  };
+  
   return (
     <section className="section-padding bg-white">
       <div className="container-wide">
@@ -60,7 +67,7 @@ const BenefitsSection = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <Button className="btn-primary text-lg">
+          <Button className="btn-primary text-lg" onClick={navigateToHowItWorks}>
             See How It Works For Your Business
           </Button>
         </div>
