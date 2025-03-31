@@ -197,45 +197,6 @@ const Blog = () => {
             </div>
           </div>
         </section>
-        
-        {/* Categories Section */}
-        <section className="section-padding bg-white">
-          <div className="container-wide">
-            <h2 className="heading-lg mb-8">Browse by Category</h2>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {categories.map((category, index) => (
-                <div 
-                  key={index} 
-                  className="bg-gray-50 hover:bg-primary/5 border border-gray-100 rounded-lg p-4 text-center transition-colors cursor-pointer"
-                >
-                  <Tag className="h-8 w-8 mx-auto mb-3 text-primary" />
-                  <h3 className="font-medium">{category}</h3>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        
-        {/* Newsletter Section */}
-        <section className="section-padding bg-primary/10">
-          <div className="container-wide">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="heading-lg mb-4">Subscribe to Our Newsletter</h2>
-              <p className="text-xl text-gray-600 mb-6">
-                Get the latest articles and insights delivered to your inbox
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input 
-                  type="email" 
-                  placeholder="Your email address" 
-                  className="flex-grow rounded-md border border-gray-300 px-4 py-2"
-                />
-                <Button>Subscribe</Button>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
     </div>

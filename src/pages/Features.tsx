@@ -4,8 +4,19 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare, Calendar, Briefcase, Zap, BarChart, Shield, Clock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Features = () => {
+  const navigate = useNavigate();
+  
+  const scrollToCTA = () => {
+    navigate('/#cta');
+    setTimeout(() => {
+      const ctaSection = document.getElementById('cta-section');
+      ctaSection?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -20,7 +31,10 @@ const Features = () => {
               <p className="text-xl text-gray-600 mb-8">
                 Discover all the capabilities that make CallSuite.ai the perfect phone assistant for service professionals
               </p>
-              <Button className="btn-primary text-lg">
+              <Button 
+                className="btn-primary text-lg bg-[#FF7A50] hover:bg-primary"
+                onClick={scrollToCTA}
+              >
                 Schedule a Free Demo
               </Button>
             </div>
@@ -149,7 +163,10 @@ const Features = () => {
             <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto">
               Schedule a personalized demo to experience how CallSuite.ai can transform your service business
             </p>
-            <Button className="bg-accent text-white hover:bg-accent/90 text-lg">
+            <Button 
+              className="bg-accent text-white hover:bg-accent/90 text-lg"
+              onClick={scrollToCTA}
+            >
               Schedule Your Free Demo
             </Button>
           </div>

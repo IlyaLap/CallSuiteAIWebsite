@@ -131,17 +131,6 @@ const Contact = () => {
             </div>
           </div>
         </section>
-        
-        {/* Map Section */}
-        <section className="section-padding bg-gray-50">
-          <div className="container-wide">
-            <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden w-full">
-              <div className="h-full w-full flex items-center justify-center">
-                <p className="text-gray-500">Map placeholder</p>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
     </div>
