@@ -12,6 +12,9 @@ import Features from "./pages/Features";
 import Industries from "./pages/Industries";
 import Resources from "./pages/Resources";
 import Blog from "./pages/Blog";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 
 // Create a client
@@ -32,6 +35,9 @@ const App: React.FC = () => {
             <Route path="/industries" element={<Industries />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/contact" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

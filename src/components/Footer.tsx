@@ -51,23 +51,23 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/about" className="text-gray-600 hover:text-primary transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
                 <Link to="/contact" className="text-gray-600 hover:text-primary transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link to="/careers" className="text-gray-600 hover:text-primary transition-colors">
-                  Careers
+                <Link to="/how-it-works" className="text-gray-600 hover:text-primary transition-colors">
+                  How It Works
                 </Link>
               </li>
               <li>
-                <Link to="/press" className="text-gray-600 hover:text-primary transition-colors">
-                  Press
+                <Link to="/features" className="text-gray-600 hover:text-primary transition-colors">
+                  Features
+                </Link>
+              </li>
+              <li>
+                <Link to="/industries" className="text-gray-600 hover:text-primary transition-colors">
+                  Industries
                 </Link>
               </li>
             </ul>
@@ -86,16 +86,6 @@ const Footer = () => {
                   Guides
                 </Link>
               </li>
-              <li>
-                <Link to="/webinars" className="text-gray-600 hover:text-primary transition-colors">
-                  Webinars
-                </Link>
-              </li>
-              <li>
-                <Link to="/support" className="text-gray-600 hover:text-primary transition-colors">
-                  Support
-                </Link>
-              </li>
             </ul>
           </div>
           
@@ -110,16 +100,6 @@ const Footer = () => {
               <li>
                 <Link to="/terms" className="text-gray-600 hover:text-primary transition-colors">
                   Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link to="/accessibility" className="text-gray-600 hover:text-primary transition-colors">
-                  Accessibility
-                </Link>
-              </li>
-              <li>
-                <Link to="/gdpr" className="text-gray-600 hover:text-primary transition-colors">
-                  GDPR
                 </Link>
               </li>
             </ul>

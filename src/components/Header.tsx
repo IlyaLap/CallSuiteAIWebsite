@@ -24,7 +24,13 @@ const Header = () => {
   return (
     <header className="w-full bg-white sticky top-0 z-50 shadow-sm">
       <div className="container-wide flex justify-between items-center py-4">
-        <Link to="/" className="flex items-center">
+        <Link 
+          to="/" 
+          className="flex items-center"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
           <img 
             src="/lovable-uploads/d1093718-988e-4af5-a04e-43c928978c3b.png" 
             alt="CallSuite.ai Logo" 
@@ -48,6 +54,9 @@ const Header = () => {
           </Link>
           <Link to="/blog" className="text-darkSlate hover:text-primary font-medium transition-colors">
             Blog
+          </Link>
+          <Link to="/contact" className="text-darkSlate hover:text-primary font-medium transition-colors">
+            Contact
           </Link>
         </nav>
         
@@ -108,6 +117,13 @@ const Header = () => {
               onClick={toggleMenu}
             >
               Blog
+            </Link>
+            <Link 
+              to="/contact" 
+              className="text-darkSlate py-2 font-medium"
+              onClick={toggleMenu}
+            >
+              Contact
             </Link>
             <Button 
               className="bg-[#FF7A50] text-white hover:bg-primary w-full"

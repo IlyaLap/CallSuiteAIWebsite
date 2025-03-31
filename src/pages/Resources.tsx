@@ -7,8 +7,21 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Download, FileText, PlayCircle, BookOpen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Resources = () => {
+  const navigate = useNavigate();
+  
+  const scrollToCTA = () => {
+    navigate('/#cta');
+    setTimeout(() => {
+      const ctaSection = document.getElementById('cta-section');
+      ctaSection?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+  
   // Sample resource data
   const guides = [
     {
@@ -96,9 +109,6 @@ const Resources = () => {
               <p className="text-xl text-gray-600 mb-8">
                 Guides, webinars, and templates to help you get the most out of CallSuite.ai
               </p>
-              <Button className="btn-primary text-lg">
-                Browse All Resources
-              </Button>
             </div>
           </div>
         </section>
@@ -195,26 +205,6 @@ const Resources = () => {
           </div>
         </section>
         
-        {/* Newsletter Section */}
-        <section className="section-padding bg-gray-50">
-          <div className="container-wide">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="heading-lg mb-4">Subscribe to Our Newsletter</h2>
-              <p className="text-xl text-gray-600 mb-6">
-                Get the latest resources, tips, and updates delivered to your inbox
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input 
-                  type="email" 
-                  placeholder="Your email address" 
-                  className="flex-grow rounded-md border border-gray-300 px-4 py-2"
-                />
-                <Button>Subscribe</Button>
-              </div>
-            </div>
-          </div>
-        </section>
-        
         {/* CTA Section */}
         <section className="section-padding bg-primary">
           <div className="container-wide text-center">
@@ -224,7 +214,7 @@ const Resources = () => {
             <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto">
               Schedule a personalized demo to see exactly how it works for your specific service business
             </p>
-            <Button className="bg-accent text-white hover:bg-accent/90 text-lg">
+            <Button className="bg-accent text-white hover:bg-accent/90 text-lg" onClick={scrollToCTA}>
               Schedule Your Free Demo
             </Button>
           </div>

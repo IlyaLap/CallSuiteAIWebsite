@@ -3,8 +3,21 @@ import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Industries = () => {
+  const navigate = useNavigate();
+  
+  const scrollToCTA = () => {
+    navigate('/#cta');
+    setTimeout(() => {
+      const ctaSection = document.getElementById('cta-section');
+      ctaSection?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+
   // Array of industries with their descriptions
   const industries = [
     {
@@ -63,9 +76,6 @@ const Industries = () => {
               <p className="text-xl text-gray-600 mb-8">
                 CallSuite.ai is tailored for service professionals across multiple industries
               </p>
-              <Button className="btn-primary text-lg">
-                Find Your Industry Solution
-              </Button>
             </div>
           </div>
         </section>
@@ -98,7 +108,7 @@ const Industries = () => {
               <p className="text-xl text-gray-600 mb-8">
                 We can customize CallSuite.ai for virtually any service business. Contact us to discuss your specific needs.
               </p>
-              <Button className="btn-primary">
+              <Button className="btn-primary" onClick={scrollToCTA}>
                 Request Custom Solution
               </Button>
             </div>
@@ -114,7 +124,7 @@ const Industries = () => {
             <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto">
               Schedule a personalized demo tailored to your specific business needs
             </p>
-            <Button className="bg-accent text-white hover:bg-accent/90 text-lg">
+            <Button className="bg-accent text-white hover:bg-accent/90 text-lg" onClick={scrollToCTA}>
               Schedule Your Free Demo
             </Button>
           </div>
