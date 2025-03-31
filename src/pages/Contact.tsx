@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -7,12 +7,44 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Contact form submitted");
+    setIsSubmitting(true);
+    setResult("Sending....");
+    
+    const formData = new FormData(e.currentTarget);
+    
+    // Add the access key for Web3Forms
+    formData.append("access_key", "0c2275e8-f84f-4be7-89bc-82fa6b7e60b1");
+    formData.append("from_name", "CallSuite.ai Contact Form");
+    
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setResult("Thank you! Your message has been sent successfully.");
+        e.currentTarget.reset();
+      } else {
+        console.log("Error", data);
+        setResult(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setResult("An error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -38,38 +70,49 @@ const Contact = () => {
               {/* Contact Form */}
               <div>
                 <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+                {result && (
+                  <Alert className={`mb-6 ${result.includes("Thank you") ? "bg-green-50 border-green-200" : "bg-yellow-50 border-yellow-200"}`}>
+                    <AlertDescription>{result}</AlertDescription>
+                  </Alert>
+                )}
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <Label htmlFor="name">Full Name</Label>
-                    <Input id="name" placeholder="Your name" className="mt-1" />
+                    <Input id="name" name="name" placeholder="Your name" className="mt-1" required />
                   </div>
                   
                   <div>
                     <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" type="email" placeholder="you@example.com" className="mt-1" />
+                    <Input id="email" type="email" name="email" placeholder="you@example.com" className="mt-1" required />
                   </div>
                   
                   <div>
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" placeholder="(555) 123-4567" className="mt-1" />
+                    <Input id="phone" name="phone" placeholder="(555) 123-4567" className="mt-1" />
                   </div>
                   
                   <div>
                     <Label htmlFor="subject">Subject</Label>
-                    <Input id="subject" placeholder="What is this regarding?" className="mt-1" />
+                    <Input id="subject" name="subject" placeholder="What is this regarding?" className="mt-1" required />
                   </div>
                   
                   <div>
                     <Label htmlFor="message">Message</Label>
                     <Textarea 
-                      id="message" 
+                      id="message"
+                      name="message" 
                       placeholder="Please provide details about your inquiry..." 
                       className="mt-1 min-h-32"
+                      required
                     />
                   </div>
                   
-                  <Button type="submit" className="w-full bg-[#FF7A50] hover:bg-primary">
-                    Send Message
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-[#FF7A50] hover:bg-primary"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </div>
