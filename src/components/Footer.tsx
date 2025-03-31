@@ -1,8 +1,21 @@
 
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  
+  const scrollToCTA = () => {
+    navigate('/#cta');
+    setTimeout(() => {
+      const ctaSection = document.getElementById('cta-section');
+      ctaSection?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+  
   return (
     <footer className="bg-white text-black">
       <div className="container-wide py-16">
@@ -119,7 +132,10 @@ const Footer = () => {
               © {new Date().getFullYear()} CallSuite.ai. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0">
-              <button className="bg-primary text-white px-5 py-2 rounded-md hover:bg-primary/90 transition-colors">
+              <button 
+                className="bg-[#FF7A50] text-white px-5 py-2 rounded-md hover:bg-primary transition-colors"
+                onClick={scrollToCTA}
+              >
                 Schedule Demo
               </button>
             </div>

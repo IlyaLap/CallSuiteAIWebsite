@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const faqs = [
   {
@@ -28,9 +29,20 @@ const faqs = [
 
 const FaqSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
   
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
+  };
+  
+  const scrollToCTA = () => {
+    navigate('/#cta');
+    setTimeout(() => {
+      const ctaSection = document.getElementById('cta-section');
+      ctaSection?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 100);
   };
   
   return (
@@ -72,7 +84,7 @@ const FaqSection = () => {
         
         <div className="mt-12 text-center">
           <p className="text-xl mb-4">Still have questions?</p>
-          <Button className="btn-primary text-lg">
+          <Button className="btn-primary text-lg" onClick={scrollToCTA}>
             Let's Talk
           </Button>
         </div>

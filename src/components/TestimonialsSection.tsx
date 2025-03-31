@@ -1,6 +1,7 @@
 
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const testimonials = [
   {
@@ -27,6 +28,18 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
+  const navigate = useNavigate();
+  
+  const scrollToCTA = () => {
+    navigate('/#cta');
+    setTimeout(() => {
+      const ctaSection = document.getElementById('cta-section');
+      ctaSection?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+  
   return (
     <section className="section-padding bg-primary/5">
       <div className="container-wide">
@@ -87,7 +100,7 @@ const TestimonialsSection = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <Button className="btn-primary text-lg">
+          <Button className="btn-primary text-lg" onClick={scrollToCTA}>
             Join These Success Stories
           </Button>
         </div>

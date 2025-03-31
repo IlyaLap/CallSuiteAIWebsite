@@ -52,7 +52,10 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:block">
-          <Button className="bg-accent text-white hover:bg-accent/90" onClick={scrollToCTA}>
+          <Button 
+            className="bg-[#FF7A50] text-white hover:bg-primary" 
+            onClick={scrollToCTA}
+          >
             Schedule Demo
           </Button>
         </div>
@@ -107,7 +110,7 @@ const Header = () => {
               Blog
             </Link>
             <Button 
-              className="bg-accent text-white hover:bg-accent/90 w-full"
+              className="bg-[#FF7A50] text-white hover:bg-primary w-full"
               onClick={() => {
                 toggleMenu();
                 scrollToCTA();

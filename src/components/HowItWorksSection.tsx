@@ -1,8 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { PhoneCall, Bot, Calendar, Play } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HowItWorksSection = () => {
+  const navigate = useNavigate();
+  
+  const navigateToHowItWorks = () => {
+    navigate('/how-it-works');
+  };
+  
   return (
     <section className="section-padding bg-gray-50">
       <div className="container-wide">
@@ -49,7 +55,7 @@ const HowItWorksSection = () => {
         </div>
         
         {/* Audio Sample Section */}
-        <div className="mt-16 bg-white rounded-xl p-8 shadow-md max-w-3xl mx-auto">
+        <div className="mt-16 bg-white rounded-xl p-8 shadow-md max-w-3xl mx-auto" id="audio-sample">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-6 md:mb-0">
               <h3 className="text-2xl font-bold mb-4">Hear CallSuite in Action</h3>
@@ -84,7 +90,7 @@ const HowItWorksSection = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <Button className="btn-primary text-lg">
+          <Button className="btn-primary text-lg" onClick={navigateToHowItWorks}>
             See How It Works For Your Business
           </Button>
         </div>

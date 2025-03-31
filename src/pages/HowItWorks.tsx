@@ -1,10 +1,36 @@
-
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { PhoneCall, MessageSquare, Calendar, ClipboardCheck, Clock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HowItWorks = () => {
+  const navigate = useNavigate();
+  
+  const scrollToCTA = () => {
+    navigate('/#cta');
+    setTimeout(() => {
+      const ctaSection = document.getElementById('cta-section');
+      ctaSection?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+
+  const navigateToFeatures = () => {
+    navigate('/features');
+  };
+
+  const navigateToAudioSample = () => {
+    navigate('/#audio-sample');
+    setTimeout(() => {
+      const audioSampleSection = document.getElementById('audio-sample');
+      audioSampleSection?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -19,7 +45,7 @@ const HowItWorks = () => {
               <p className="text-xl text-gray-600 mb-8">
                 Discover how our AI phone assistant handles your calls, books appointments, and helps grow your service business
               </p>
-              <Button className="btn-primary text-lg">
+              <Button className="btn-primary text-lg" onClick={scrollToCTA}>
                 Schedule a Demo
               </Button>
             </div>
@@ -39,10 +65,10 @@ const HowItWorks = () => {
                   Unlike basic answering services or chatbots, CallSuite.ai is custom-built for your specific business and can have natural, flowing conversations with your customers.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button className="btn-primary">
+                  <Button className="btn-primary" onClick={navigateToAudioSample}>
                     Hear Audio Sample
                   </Button>
-                  <Button variant="outline">
+                  <Button variant="outline" onClick={navigateToFeatures}>
                     See Features
                   </Button>
                 </div>
@@ -218,35 +244,6 @@ const HowItWorks = () => {
           </div>
         </section>
         
-        {/* Integration Section */}
-        <section className="section-padding bg-white">
-          <div className="container-wide">
-            <div className="text-center mb-16">
-              <h2 className="heading-lg mb-4">Seamless Integrations</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Works with the tools you already use
-              </p>
-            </div>
-            
-            <div className="bg-gray-50 rounded-xl p-8 max-w-4xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {/* Integration logos (placeholders) */}
-                {[...Array(8)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-lg p-4 h-20 flex items-center justify-center shadow-sm">
-                    <div className="h-10 w-32 bg-gray-200 rounded"></div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="text-center mt-8">
-                <p className="text-gray-600">
-                  Don't see your tool? Contact us to discuss custom integrations.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-        
         {/* CTA Section */}
         <section className="section-padding bg-primary">
           <div className="container-wide text-center">
@@ -256,7 +253,7 @@ const HowItWorks = () => {
             <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto">
               Schedule a personalized demo to see exactly how it works for your specific service business
             </p>
-            <Button className="bg-accent text-white hover:bg-accent/90 text-lg">
+            <Button className="bg-accent text-white hover:bg-accent/90 text-lg" onClick={scrollToCTA}>
               Schedule Your Demo Now
             </Button>
           </div>

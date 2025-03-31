@@ -1,8 +1,11 @@
+
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
 const HeroSection = () => {
   const navigate = useNavigate();
+  
   const scrollToCTA = () => {
     navigate('/#cta');
     setTimeout(() => {
@@ -12,6 +15,11 @@ const HeroSection = () => {
       });
     }, 100);
   };
+
+  const navigateToHowItWorks = () => {
+    navigate('/how-it-works');
+  };
+  
   return <section className="relative bg-gradient-to-r from-primary/10 to-primary/5 overflow-hidden">
       <div className="container-wide flex flex-col-reverse lg:flex-row items-center py-16 md:py-24">
         {/* Hero Content */}
@@ -29,28 +37,10 @@ const HeroSection = () => {
               <Button onClick={scrollToCTA} className="btn-primary text-[FF7A50] text-slate-50 bg-[FF7A50]">
                 Schedule Your Free Demo
               </Button>
-              <Button variant="outline" className="text-lg gap-2">
+              <Button variant="outline" className="text-lg gap-2" onClick={navigateToHowItWorks}>
                 <Play size={18} className="text-primary" />
                 See How It Works
               </Button>
-            </div>
-            
-            <div className="mt-8">
-              <p className="text-gray-500 text-sm mb-4">TRUSTED BY 1,000+ SERVICE BUSINESSES</p>
-              <div className="flex flex-wrap gap-8 items-center">
-                <div className="h-8 opacity-70">
-                  <div className="h-full w-24 bg-gray-400 rounded-md"></div>
-                </div>
-                <div className="h-8 opacity-70">
-                  <div className="h-full w-24 bg-gray-400 rounded-md"></div>
-                </div>
-                <div className="h-8 opacity-70">
-                  <div className="h-full w-24 bg-gray-400 rounded-md"></div>
-                </div>
-                <div className="h-8 opacity-70">
-                  <div className="h-full w-24 bg-gray-400 rounded-md"></div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -68,4 +58,5 @@ const HeroSection = () => {
       </div>
     </section>;
 };
+
 export default HeroSection;

@@ -1,8 +1,21 @@
 
 import { Button } from "@/components/ui/button";
 import { PhoneCall, Calendar, CalendarX, Clock, X, Check } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ProblemSolutionSection = () => {
+  const navigate = useNavigate();
+  
+  const scrollToCTA = () => {
+    navigate('/#cta');
+    setTimeout(() => {
+      const ctaSection = document.getElementById('cta-section');
+      ctaSection?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+  
   return (
     <section className="section-padding bg-white">
       <div className="container-wide">
@@ -138,7 +151,7 @@ const ProblemSolutionSection = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <Button className="btn-primary text-lg">
+          <Button className="btn-primary text-lg" onClick={scrollToCTA}>
             Transform Your Business Operations
           </Button>
         </div>
