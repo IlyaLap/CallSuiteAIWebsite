@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrench, Plumbing, Roof } from "lucide-react";
+import { Wrench, Droplet, Home, Building2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,7 @@ const Industries = () => {
       name: "Plumbing",
       description: "Streamline emergency plumbing service calls, schedule maintenance, and handle complex water system inquiries with our intelligent AI assistant.",
       image: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc",
-      icon: Plumbing
+      icon: Droplet
     },
     {
       name: "HVAC",
@@ -59,7 +59,7 @@ const Industries = () => {
       name: "Roofing",
       description: "Efficiently manage storm damage inquiries, schedule comprehensive roof inspections, and book repair services with intelligent prioritization.",
       image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
-      icon: Roof
+      icon: Building2
     },
     {
       name: "Appliance Repair",
