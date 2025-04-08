@@ -1,5 +1,6 @@
+
 import React from "react";
-import { Wrench, Droplet, Home, Building2 } from "lucide-react";
+import { Wrench, Droplet, Building2, SprayCan, Bug, Leaf, Zap, Wind } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -22,49 +23,49 @@ const Industries = () => {
     {
       name: "Plumbing",
       description: "Streamline emergency plumbing service calls, schedule maintenance, and handle complex water system inquiries with our intelligent AI assistant.",
-      image: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc",
+      image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&q=80&w=800&h=500",
       icon: Droplet
     },
     {
       name: "HVAC",
       description: "Manage AC repair calls, heating system inquiries, and seasonal maintenance requests. The AI can prioritize emergency calls during extreme weather conditions.",
       image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800&h=500",
-      icon: null
+      icon: Wind
     },
     {
       name: "Electrical",
       description: "Address power outages, electrical repairs, and installation requests. Our AI can identify urgent safety issues and prioritize dispatch accordingly.",
       image: "https://images.unsplash.com/photo-1558402529-d2638a7023e9?auto=format&fit=crop&q=80&w=800&h=500",
-      icon: null
+      icon: Zap
     },
     {
       name: "Lawn Care & Landscaping",
       description: "Schedule routine maintenance, handle seasonal service requests, and provide quotes for landscaping projects based on property size and requirements.",
       image: "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&q=80&w=800&h=500",
-      icon: null
+      icon: Leaf
     },
     {
       name: "Cleaning Services",
       description: "Book regular cleaning appointments, handle special cleaning requests, and manage scheduling for residential and commercial properties.",
       image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=800&h=500",
-      icon: null
+      icon: SprayCan
     },
     {
       name: "Pest Control",
       description: "Schedule inspections, answer questions about treatments, and book emergency pest control services when customers identify infestations.",
       image: "https://images.unsplash.com/photo-1586282391129-76a6df230234?auto=format&fit=crop&q=80&w=800&h=500",
-      icon: null
+      icon: Bug
     },
     {
       name: "Roofing",
       description: "Efficiently manage storm damage inquiries, schedule comprehensive roof inspections, and book repair services with intelligent prioritization.",
-      image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      image: "https://images.unsplash.com/photo-1632122708993-2ae8173e2c02?auto=format&fit=crop&q=80&w=800&h=500",
       icon: Building2
     },
     {
       name: "Appliance Repair",
       description: "Diagnose appliance issues quickly, schedule precise service visits, and provide advanced troubleshooting guidance for complex malfunctions.",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
+      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=800&h=500",
       icon: Wrench
     }
   ];
