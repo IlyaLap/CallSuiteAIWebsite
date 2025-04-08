@@ -84,7 +84,11 @@ const HowItWorks = () => {
                     {isPlaying ? <Pause size={16} /> : <Play size={16} />}
                     {isPlaying ? 'Pause Audio Sample' : 'Hear Audio Sample'}
                   </Button>
-                  <audio ref={audioRef} src="/sample-call.mp3" onEnded={() => setIsPlaying(false)} />
+                  <audio 
+                    ref={audioRef} 
+                    src="https://audio.jukehost.co.uk/hRx0sGGEt8QGHMzEV7qQJlMHzYiEaZVl" 
+                    onEnded={() => setIsPlaying(false)} 
+                  />
                   <Button variant="outline" onClick={navigateToFeatures}>
                     See Features
                   </Button>
@@ -92,7 +96,7 @@ const HowItWorks = () => {
               </div>
               <div className="flex items-center justify-center">
                 <div className="bg-gray-100 rounded-lg p-6 w-full max-w-md">
-                  <h3 className="text-xl font-semibold mb-4 text-center">Call Assistant Demo</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-center">Audio Visualization</h3>
                   <div className="flex items-center justify-center gap-1 h-40">
                     {[...Array(30)].map((_, i) => (
                       <div 

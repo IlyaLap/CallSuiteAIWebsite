@@ -81,7 +81,11 @@ const HowItWorksSection = () => {
                 {isPlaying ? <Pause size={16} /> : <Play size={16} />}
                 {isPlaying ? 'Pause Audio Sample' : 'Play Audio Sample'}
               </Button>
-              <audio ref={audioRef} src="/sample-call.mp3" onEnded={() => setIsPlaying(false)} />
+              <audio 
+                ref={audioRef} 
+                src="https://audio.jukehost.co.uk/hRx0sGGEt8QGHMzEV7qQJlMHzYiEaZVl" 
+                onEnded={() => setIsPlaying(false)} 
+              />
             </div>
             <div className="md:w-1/2 md:pl-8">
               <div className="bg-gray-100 rounded-lg p-4 h-36 flex items-center justify-center">
