@@ -1,12 +1,27 @@
+
 import { Button } from "@/components/ui/button";
-import { PhoneCall, Bot, Calendar, Play } from "lucide-react";
+import { PhoneCall, Bot, Calendar, Play, Pause } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
 
 const HowItWorksSection = () => {
   const navigate = useNavigate();
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   
   const navigateToHowItWorks = () => {
     navigate('/how-it-works');
+  };
+  
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
   
   return (
@@ -62,10 +77,11 @@ const HowItWorksSection = () => {
               <p className="text-gray-600 mb-6">
                 Listen to a sample conversation between a customer and your AI assistant.
               </p>
-              <Button className="flex items-center gap-2">
-                <Play size={16} />
-                Play Audio Sample
+              <Button className="flex items-center gap-2" onClick={toggleAudio}>
+                {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                {isPlaying ? 'Pause Audio Sample' : 'Play Audio Sample'}
               </Button>
+              <audio ref={audioRef} src="/sample-call.mp3" onEnded={() => setIsPlaying(false)} />
             </div>
             <div className="md:w-1/2 md:pl-8">
               <div className="bg-gray-100 rounded-lg p-4 h-36 flex items-center justify-center">
@@ -78,7 +94,8 @@ const HowItWorksSection = () => {
                         className="w-1 bg-primary rounded-full" 
                         style={{ 
                           height: `${Math.sin(i/2) * 20 + 30}px`,
-                          opacity: 0.5 + Math.sin(i/3) * 0.5
+                          opacity: isPlaying ? (0.5 + Math.sin((i/3) + Date.now()/500) * 0.5) : (0.5 + Math.sin(i/3) * 0.5),
+                          transition: 'height 0.2s ease-in-out'
                         }}
                       ></div>
                     ))}

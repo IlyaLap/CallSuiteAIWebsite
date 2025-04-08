@@ -2,11 +2,14 @@
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { PhoneCall, MessageSquare, Calendar, ClipboardCheck, Clock } from "lucide-react";
+import { PhoneCall, MessageSquare, Calendar, ClipboardCheck, Clock, Play, Pause } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
 
 const HowItWorks = () => {
   const navigate = useNavigate();
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   
   const scrollToCTA = () => {
     navigate('/#cta');
@@ -30,6 +33,17 @@ const HowItWorks = () => {
         behavior: 'smooth'
       });
     }, 100);
+  };
+  
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
   
   return (
@@ -66,16 +80,33 @@ const HowItWorks = () => {
                   Unlike basic answering services or chatbots, CallSuite.ai is custom-built for your specific business and can have natural, flowing conversations with your customers.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button className="btn-primary" onClick={navigateToAudioSample}>
-                    Hear Audio Sample
+                  <Button className="btn-primary flex items-center gap-2" onClick={toggleAudio}>
+                    {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                    {isPlaying ? 'Pause Audio Sample' : 'Hear Audio Sample'}
                   </Button>
+                  <audio ref={audioRef} src="/sample-call.mp3" onEnded={() => setIsPlaying(false)} />
                   <Button variant="outline" onClick={navigateToFeatures}>
                     See Features
                   </Button>
                 </div>
               </div>
-              <div className="bg-gray-100 rounded-xl aspect-video flex items-center justify-center">
-                <p className="text-gray-500">Product demo video placeholder</p>
+              <div className="flex items-center justify-center">
+                <div className="bg-gray-100 rounded-lg p-6 w-full max-w-md">
+                  <h3 className="text-xl font-semibold mb-4 text-center">Call Assistant Demo</h3>
+                  <div className="flex items-center justify-center gap-1 h-40">
+                    {[...Array(30)].map((_, i) => (
+                      <div 
+                        key={i} 
+                        className="w-2 bg-primary rounded-full" 
+                        style={{ 
+                          height: `${Math.sin(i/3) * 30 + 40}px`,
+                          opacity: isPlaying ? (0.5 + Math.sin((i/4) + Date.now()/500) * 0.5) : (0.5 + Math.sin(i/4) * 0.5),
+                          transition: 'height 0.2s ease-in-out'
+                        }}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

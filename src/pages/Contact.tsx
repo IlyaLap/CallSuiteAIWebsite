@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Mail, Clock } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -34,33 +34,11 @@ const Contact = () => {
             <div className="grid md:grid-cols-2 gap-8 mt-12">
               <div className="flex items-start">
                 <div className="flex items-center justify-center h-10 w-10 bg-primary/10 text-primary rounded-full mr-4">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Our Office</h3>
-                  <p className="text-gray-600">123 Tech Way, Suite 400</p>
-                  <p className="text-gray-600">San Francisco, CA 94107</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="flex items-center justify-center h-10 w-10 bg-primary/10 text-primary rounded-full mr-4">
-                  <Phone size={20} />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Phone</h3>
-                  <p className="text-gray-600">(555) 123-4567</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="flex items-center justify-center h-10 w-10 bg-primary/10 text-primary rounded-full mr-4">
                   <Mail size={20} />
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Email</h3>
-                  <p className="text-gray-600">info@callsuite.ai</p>
-                  <p className="text-gray-600">support@callsuite.ai</p>
+                  <p className="text-gray-600">Hamish@callsuite.ai</p>
                 </div>
               </div>
               

@@ -1,6 +1,5 @@
 
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
@@ -31,20 +30,6 @@ const Footer = () => {
             <p className="text-gray-700 mb-4">
               The AI phone assistant built specifically for service professionals.
             </p>
-            <div className="flex space-x-4 mt-6">
-              <a href="#" className="text-gray-600 hover:text-primary transition-colors" aria-label="Facebook">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-gray-600 hover:text-primary transition-colors" aria-label="Twitter">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-600 hover:text-primary transition-colors" aria-label="LinkedIn">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="text-gray-600 hover:text-primary transition-colors" aria-label="Instagram">
-                <Instagram size={20} />
-              </a>
-            </div>
           </div>
           
           <div>
