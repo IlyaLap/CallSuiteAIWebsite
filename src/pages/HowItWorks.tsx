@@ -2,9 +2,9 @@
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { PhoneCall, MessageSquare, Calendar, ClipboardCheck, Clock, Play, Pause } from "lucide-react";
+import { PhoneCall, MessageSquare, Calendar, ClipboardCheck, Clock, Play, Pause, AudioWaveform } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const HowItWorks = () => {
   const navigate = useNavigate();
@@ -40,11 +40,32 @@ const HowItWorks = () => {
       if (isPlaying) {
         audioRef.current.pause();
       } else {
-        audioRef.current.play();
+        audioRef.current.play().catch(error => {
+          console.error("Audio play error:", error);
+        });
       }
       setIsPlaying(!isPlaying);
     }
   };
+  
+  // Update isPlaying state when audio ends
+  useEffect(() => {
+    const audioElement = audioRef.current;
+    
+    const handleAudioEnded = () => {
+      setIsPlaying(false);
+    };
+    
+    if (audioElement) {
+      audioElement.addEventListener('ended', handleAudioEnded);
+    }
+    
+    return () => {
+      if (audioElement) {
+        audioElement.removeEventListener('ended', handleAudioEnded);
+      }
+    };
+  }, []);
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -87,7 +108,7 @@ const HowItWorks = () => {
                   <audio 
                     ref={audioRef} 
                     src="https://audio.jukehost.co.uk/hRx0sGGEt8QGHMzEV7qQJlMHzYiEaZVl" 
-                    onEnded={() => setIsPlaying(false)} 
+                    preload="auto" 
                   />
                   <Button variant="outline" onClick={navigateToFeatures}>
                     See Features

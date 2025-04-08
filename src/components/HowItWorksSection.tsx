@@ -1,8 +1,8 @@
 
 import { Button } from "@/components/ui/button";
-import { PhoneCall, Bot, Calendar, Play, Pause } from "lucide-react";
+import { PhoneCall, Bot, Calendar, Play, Pause, AudioWaveform } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const HowItWorksSection = () => {
   const navigate = useNavigate();
@@ -18,11 +18,32 @@ const HowItWorksSection = () => {
       if (isPlaying) {
         audioRef.current.pause();
       } else {
-        audioRef.current.play();
+        audioRef.current.play().catch(error => {
+          console.error("Audio play error:", error);
+        });
       }
       setIsPlaying(!isPlaying);
     }
   };
+  
+  // Update isPlaying state when audio ends
+  useEffect(() => {
+    const audioElement = audioRef.current;
+    
+    const handleAudioEnded = () => {
+      setIsPlaying(false);
+    };
+    
+    if (audioElement) {
+      audioElement.addEventListener('ended', handleAudioEnded);
+    }
+    
+    return () => {
+      if (audioElement) {
+        audioElement.removeEventListener('ended', handleAudioEnded);
+      }
+    };
+  }, []);
   
   return (
     <section className="section-padding bg-gray-50">
@@ -84,13 +105,12 @@ const HowItWorksSection = () => {
               <audio 
                 ref={audioRef} 
                 src="https://audio.jukehost.co.uk/hRx0sGGEt8QGHMzEV7qQJlMHzYiEaZVl" 
-                onEnded={() => setIsPlaying(false)} 
+                preload="auto"
               />
             </div>
             <div className="md:w-1/2 md:pl-8">
               <div className="bg-gray-100 rounded-lg p-4 h-36 flex items-center justify-center">
                 <div className="text-center">
-                  <p className="text-gray-500">Audio waveform visualization</p>
                   <div className="flex items-center justify-center gap-1 mt-2">
                     {[...Array(20)].map((_, i) => (
                       <div 
