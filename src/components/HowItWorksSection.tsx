@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { PhoneCall, Bot, Calendar, Play, Pause } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 declare global {
   interface Window {
@@ -16,58 +17,91 @@ const HowItWorksSection = () => {
   const playerRef = useRef<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
+  const isMobile = useIsMobile();
   
   const navigateToHowItWorks = () => {
     navigate('/how-it-works');
   };
   
   useEffect(() => {
-    // Load YouTube API script
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+    // Load YouTube API script if not already loaded
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+    }
 
-    // Initialize player when API is ready
-    window.onYouTubeIframeAPIReady = () => {
-      playerRef.current = new window.YT.Player('youtube-audio-player-home', {
-        height: '0',
-        width: '0',
-        videoId: 'uyPYq94ihh4', // YouTube short ID
-        playerVars: {
-          'playsinline': 1,
-          'controls': 0,
-          'disablekb': 1
-        },
-        events: {
-          'onReady': () => setIsPlayerReady(true),
-          'onStateChange': (event: any) => {
-            if (event.data === window.YT.PlayerState.ENDED) {
-              setIsPlaying(false);
+    // Setup player initialization function
+    const initializePlayer = () => {
+      if (document.getElementById('youtube-audio-player-home')) {
+        playerRef.current = new window.YT.Player('youtube-audio-player-home', {
+          height: '0',
+          width: '0',
+          videoId: 'uyPYq94ihh4', // YouTube video ID
+          playerVars: {
+            'playsinline': 1,
+            'controls': 0,
+            'disablekb': 1
+          },
+          events: {
+            'onReady': () => {
+              console.log("YouTube player is ready");
+              setIsPlayerReady(true);
+            },
+            'onStateChange': (event: any) => {
+              if (event.data === window.YT.PlayerState.ENDED) {
+                setIsPlaying(false);
+              }
+            },
+            'onError': (error: any) => {
+              console.error("YouTube player error:", error);
             }
           }
-        }
-      });
+        });
+      }
     };
+
+    // Initialize player when API is ready
+    if (window.YT && window.YT.Player) {
+      initializePlayer();
+    } else {
+      // Store the original callback if it exists
+      const originalCallback = window.onYouTubeIframeAPIReady;
+      
+      window.onYouTubeIframeAPIReady = () => {
+        // Call the original callback if it exists
+        if (typeof originalCallback === 'function') {
+          originalCallback();
+        }
+        initializePlayer();
+      };
+    }
 
     // Cleanup function
     return () => {
       if (playerRef.current) {
         playerRef.current.destroy();
       }
-      window.onYouTubeIframeAPIReady = () => {};
     };
   }, []);
 
   const toggleAudio = () => {
-    if (!playerRef.current || !isPlayerReady) return;
+    if (!playerRef.current || !isPlayerReady) {
+      console.log("Player not ready or not initialized");
+      return;
+    }
     
-    if (isPlaying) {
-      playerRef.current.pauseVideo();
-      setIsPlaying(false);
-    } else {
-      playerRef.current.playVideo();
-      setIsPlaying(true);
+    try {
+      if (isPlaying) {
+        playerRef.current.pauseVideo();
+        setIsPlaying(false);
+      } else {
+        playerRef.current.playVideo();
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error("Error toggling audio:", error);
     }
   };
   
@@ -130,10 +164,13 @@ const HowItWorksSection = () => {
                 disabled={!isPlayerReady}
               >
                 {isPlaying ? <Pause size={16} /> : <Play size={16} />}
-                {isPlaying ? 'Pause Audio Sample' : 'Play Audio Sample'}
+                {isPlaying ? 'Pause Audio' : 'Play Audio Sample'}
               </Button>
+              <p className="text-sm text-gray-500 mt-2">
+                {isPlayerReady ? (isPlaying ? 'Now playing...' : 'Ready to play') : 'Loading audio player...'}
+              </p>
               {/* Hidden YouTube player */}
-              <div id="youtube-audio-player-home" style={{ display: 'none' }}></div>
+              <div id="youtube-audio-player-home"></div>
             </div>
             <div className="md:w-1/2 md:pl-8">
               <div className="bg-gray-100 rounded-lg p-4 h-36 flex items-center justify-center">

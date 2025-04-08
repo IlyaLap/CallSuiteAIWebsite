@@ -1,9 +1,11 @@
 
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   
   const scrollToCTA = () => {
     navigate('/#cta');
@@ -34,7 +36,7 @@ const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <Button onClick={scrollToCTA} className="btn-primary text-[FF7A50] text-slate-50 bg-[FF7A50]">
+              <Button onClick={scrollToCTA} className="btn-primary text-slate-50">
                 Schedule Your Free Demo
               </Button>
               <Button variant="outline" className="text-lg gap-2" onClick={navigateToHowItWorks}>
@@ -49,11 +51,11 @@ const HeroSection = () => {
           <div className="relative aspect-video bg-black/5 rounded-lg shadow-xl overflow-hidden">
             <iframe 
               className="absolute inset-0 w-full h-full" 
-              src="https://www.youtube.com/embed/EvvKi2Pm_Rc" 
+              src="https://www.youtube.com/embed/EvvKi2Pm_Rc?playsinline=1" 
               title="CallSuite.ai Demo Video" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen>
-            </iframe>
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; playsinline" 
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
       </div>
