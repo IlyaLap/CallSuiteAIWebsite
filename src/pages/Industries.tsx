@@ -59,7 +59,7 @@ const Industries = () => {
     {
       name: "Roofing",
       description: "Efficiently manage storm damage inquiries, schedule comprehensive roof inspections, and book repair services with intelligent prioritization.",
-      image: "https://images.unsplash.com/photo-1632122708993-2ae8173e2c02?auto=format&fit=crop&q=80&w=800&h=500",
+      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500",
       icon: Building2
     },
     {
