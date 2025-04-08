@@ -1,49 +1,75 @@
 
 import { Button } from "@/components/ui/button";
-import { PhoneCall, Bot, Calendar, Play, Pause, AudioWaveform } from "lucide-react";
+import { PhoneCall, Bot, Calendar, Play, Pause } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
+
 const HowItWorksSection = () => {
   const navigate = useNavigate();
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const playerRef = useRef<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlayerReady, setIsPlayerReady] = useState(false);
   
   const navigateToHowItWorks = () => {
     navigate('/how-it-works');
   };
   
-  const toggleAudio = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch(error => {
-          console.error("Audio play error:", error);
-        });
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-  
-  // Update isPlaying state when audio ends
   useEffect(() => {
-    const audioElement = audioRef.current;
-    
-    const handleAudioEnded = () => {
-      setIsPlaying(false);
+    // Load YouTube API script
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+
+    // Initialize player when API is ready
+    window.onYouTubeIframeAPIReady = () => {
+      playerRef.current = new window.YT.Player('youtube-audio-player-home', {
+        height: '0',
+        width: '0',
+        videoId: 'uyPYq94ihh4', // YouTube short ID
+        playerVars: {
+          'playsinline': 1,
+          'controls': 0,
+          'disablekb': 1
+        },
+        events: {
+          'onReady': () => setIsPlayerReady(true),
+          'onStateChange': (event: any) => {
+            if (event.data === window.YT.PlayerState.ENDED) {
+              setIsPlaying(false);
+            }
+          }
+        }
+      });
     };
-    
-    if (audioElement) {
-      audioElement.addEventListener('ended', handleAudioEnded);
-    }
-    
+
+    // Cleanup function
     return () => {
-      if (audioElement) {
-        audioElement.removeEventListener('ended', handleAudioEnded);
+      if (playerRef.current) {
+        playerRef.current.destroy();
       }
+      window.onYouTubeIframeAPIReady = () => {};
     };
   }, []);
+
+  const toggleAudio = () => {
+    if (!playerRef.current || !isPlayerReady) return;
+    
+    if (isPlaying) {
+      playerRef.current.pauseVideo();
+      setIsPlaying(false);
+    } else {
+      playerRef.current.playVideo();
+      setIsPlaying(true);
+    }
+  };
   
   return (
     <section className="section-padding bg-gray-50">
@@ -98,15 +124,16 @@ const HowItWorksSection = () => {
               <p className="text-gray-600 mb-6">
                 Listen to a sample conversation between a customer and your AI assistant.
               </p>
-              <Button className="flex items-center gap-2" onClick={toggleAudio}>
+              <Button 
+                className="flex items-center gap-2" 
+                onClick={toggleAudio}
+                disabled={!isPlayerReady}
+              >
                 {isPlaying ? <Pause size={16} /> : <Play size={16} />}
                 {isPlaying ? 'Pause Audio Sample' : 'Play Audio Sample'}
               </Button>
-              <audio 
-                ref={audioRef} 
-                src="https://audio.jukehost.co.uk/hRx0sGGEt8QGHMzEV7qQJlMHzYiEaZVl" 
-                preload="auto"
-              />
+              {/* Hidden YouTube player */}
+              <div id="youtube-audio-player-home" style={{ display: 'none' }}></div>
             </div>
             <div className="md:w-1/2 md:pl-8">
               <div className="bg-gray-100 rounded-lg p-4 h-36 flex items-center justify-center">

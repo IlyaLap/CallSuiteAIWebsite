@@ -2,14 +2,22 @@
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { PhoneCall, MessageSquare, Calendar, ClipboardCheck, Clock, Play, Pause, AudioWaveform } from "lucide-react";
+import { PhoneCall, MessageSquare, Calendar, ClipboardCheck, Clock, Play, Pause } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
+
 const HowItWorks = () => {
   const navigate = useNavigate();
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const playerRef = useRef<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlayerReady, setIsPlayerReady] = useState(false);
   
   const scrollToCTA = () => {
     navigate('/#cta');
@@ -35,37 +43,75 @@ const HowItWorks = () => {
     }, 100);
   };
   
-  const toggleAudio = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch(error => {
-          console.error("Audio play error:", error);
+  useEffect(() => {
+    // We need to check if the YouTube API is already loaded
+    if (window.YT && window.YT.Player) {
+      initializePlayer();
+    } else {
+      // Load YouTube API script if not already loaded
+      const existingScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+      
+      if (!existingScript) {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+      }
+      
+      // Store the original callback if it exists
+      const originalCallback = window.onYouTubeIframeAPIReady;
+      
+      window.onYouTubeIframeAPIReady = () => {
+        // Call the original callback if it exists
+        if (typeof originalCallback === 'function') {
+          originalCallback();
+        }
+        initializePlayer();
+      };
+    }
+
+    function initializePlayer() {
+      if (document.getElementById('youtube-audio-player-how')) {
+        playerRef.current = new window.YT.Player('youtube-audio-player-how', {
+          height: '0',
+          width: '0',
+          videoId: 'uyPYq94ihh4', // YouTube short ID
+          playerVars: {
+            'playsinline': 1,
+            'controls': 0,
+            'disablekb': 1
+          },
+          events: {
+            'onReady': () => setIsPlayerReady(true),
+            'onStateChange': (event: any) => {
+              if (event.data === window.YT.PlayerState.ENDED) {
+                setIsPlaying(false);
+              }
+            }
+          }
         });
       }
-      setIsPlaying(!isPlaying);
     }
-  };
-  
-  // Update isPlaying state when audio ends
-  useEffect(() => {
-    const audioElement = audioRef.current;
-    
-    const handleAudioEnded = () => {
-      setIsPlaying(false);
-    };
-    
-    if (audioElement) {
-      audioElement.addEventListener('ended', handleAudioEnded);
-    }
-    
+
+    // Cleanup function
     return () => {
-      if (audioElement) {
-        audioElement.removeEventListener('ended', handleAudioEnded);
+      if (playerRef.current) {
+        playerRef.current.destroy();
       }
     };
   }, []);
+
+  const toggleAudio = () => {
+    if (!playerRef.current || !isPlayerReady) return;
+    
+    if (isPlaying) {
+      playerRef.current.pauseVideo();
+      setIsPlaying(false);
+    } else {
+      playerRef.current.playVideo();
+      setIsPlaying(true);
+    }
+  };
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -101,15 +147,16 @@ const HowItWorks = () => {
                   Unlike basic answering services or chatbots, CallSuite.ai is custom-built for your specific business and can have natural, flowing conversations with your customers.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button className="btn-primary flex items-center gap-2" onClick={toggleAudio}>
+                  <Button 
+                    className="btn-primary flex items-center gap-2" 
+                    onClick={toggleAudio}
+                    disabled={!isPlayerReady}
+                  >
                     {isPlaying ? <Pause size={16} /> : <Play size={16} />}
-                    {isPlaying ? 'Pause Audio Sample' : 'Hear Audio Sample'}
+                    {isPlaying ? 'Pause Audio' : 'Hear Audio Sample'}
                   </Button>
-                  <audio 
-                    ref={audioRef} 
-                    src="https://audio.jukehost.co.uk/hRx0sGGEt8QGHMzEV7qQJlMHzYiEaZVl" 
-                    preload="auto" 
-                  />
+                  {/* Hidden YouTube player */}
+                  <div id="youtube-audio-player-how" style={{ display: 'none' }}></div>
                   <Button variant="outline" onClick={navigateToFeatures}>
                     See Features
                   </Button>
@@ -117,7 +164,6 @@ const HowItWorks = () => {
               </div>
               <div className="flex items-center justify-center">
                 <div className="bg-gray-100 rounded-lg p-6 w-full max-w-md">
-                  <h3 className="text-xl font-semibold mb-4 text-center">Audio Visualization</h3>
                   <div className="flex items-center justify-center gap-1 h-40">
                     {[...Array(30)].map((_, i) => (
                       <div 
