@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { PhoneCall, Calendar, CalendarX, Clock, X, Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -16,26 +17,26 @@ const ProblemSolutionSection = () => {
   };
   
   return (
-    <section className="section-padding bg-white" data-sb-object-id="problem-solution-section">
+    <section className="section-padding bg-white">
       <div className="container-wide">
         <div className="text-center mb-16">
-          <h2 className="heading-lg mb-4" data-sb-field-path="heading">
+          <h2 className="heading-lg mb-4">
             Stop Losing Business To Missed Calls
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto" data-sb-field-path="description">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Every missed call is a missed opportunity. See how CallSuite.ai transforms your business operations.
           </p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-12 md:gap-16">
           {/* BEFORE Column */}
-          <div className="bg-gray-50 rounded-xl p-8 border border-gray-200" data-sb-object-id="before-column">
+          <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
             <div className="flex items-center justify-center h-20 w-20 bg-red-100 text-red-500 rounded-full mx-auto mb-6">
               <X size={32} />
             </div>
-            <h3 className="text-2xl font-bold text-center text-red-500 mb-6 uppercase" data-sb-field-path="beforeHeading">BEFORE</h3>
+            <h3 className="text-2xl font-bold text-center text-red-500 mb-6 uppercase">Before</h3>
             
-            <div className="space-y-6" data-sb-field-path="beforeItems">
+            <div className="space-y-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
                   <X size={20} className="text-red-500" />
@@ -89,13 +90,13 @@ const ProblemSolutionSection = () => {
           </div>
           
           {/* AFTER Column */}
-          <div className="bg-primary/5 rounded-xl p-8 border border-primary/20" data-sb-object-id="after-column">
+          <div className="bg-primary/5 rounded-xl p-8 border border-primary/20">
             <div className="flex items-center justify-center h-20 w-20 bg-green-100 text-green-500 rounded-full mx-auto mb-6">
               <Check size={32} />
             </div>
-            <h3 className="text-2xl font-bold text-center text-green-500 mb-6 uppercase" data-sb-field-path="afterHeading">AFTER</h3>
+            <h3 className="text-2xl font-bold text-center text-green-500 mb-6 uppercase">After</h3>
             
-            <div className="space-y-6" data-sb-field-path="afterItems">
+            <div className="space-y-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
                   <Check size={20} className="text-green-500" />
@@ -150,7 +151,7 @@ const ProblemSolutionSection = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <Button className="btn-primary text-lg" onClick={scrollToCTA} data-sb-field-path="ctaButton">
+          <Button className="btn-primary text-lg" onClick={scrollToCTA}>
             Transform Your Business Operations
           </Button>
         </div>

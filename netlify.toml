@@ -17,8 +17,4 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; img-src 'self' https://* data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://cdn.gpteng.co https://netlify-cdp-loader.netlify.app; connect-src 'self' https://*; font-src 'self' data:; frame-src 'self';"
-
-# Netlify visual editor support
-[build.environment]
-  NETLIFY_LIVE_PREVIEW = "true"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' https://* data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://cdn.gpteng.co; connect-src 'self' https://*; font-src 'self' data:; frame-src 'self';"
