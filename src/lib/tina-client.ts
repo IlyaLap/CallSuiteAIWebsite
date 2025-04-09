@@ -4,7 +4,7 @@ import { createClient } from 'tinacms';
 // This client is used for querying data from TinaCMS
 export const tinaClient = createClient({
   apiUrl: import.meta.env.VITE_TINA_CLIENT_URL || 'http://localhost:4001/graphql',
-  tokenBrowser: import.meta.env.VITE_TINA_TOKEN || '',
+  token: import.meta.env.VITE_TINA_TOKEN || '',
 });
 
 // Example query function
