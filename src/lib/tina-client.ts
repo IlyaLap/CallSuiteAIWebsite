@@ -12,8 +12,8 @@ export const tinaClient = createClient({
 // Example query function
 export async function fetchPageData(relativePath: string) {
   const variables = { relativePath };
-  return await tinaClient.request({
-    query: `
+  return await tinaClient.request(
+    `
       query PageQuery($relativePath: String!) {
         page(relativePath: $relativePath) {
           body
@@ -22,14 +22,14 @@ export async function fetchPageData(relativePath: string) {
       }
     `,
     variables
-  });
+  );
 }
 
 // Example blog post query function
 export async function fetchPostData(relativePath: string) {
   const variables = { relativePath };
-  return await tinaClient.request({
-    query: `
+  return await tinaClient.request(
+    `
       query PostQuery($relativePath: String!) {
         post(relativePath: $relativePath) {
           title
@@ -41,13 +41,13 @@ export async function fetchPostData(relativePath: string) {
       }
     `,
     variables
-  });
+  );
 }
 
 // Example query for all blog posts
 export async function fetchAllPosts() {
-  return await tinaClient.request({
-    query: `
+  return await tinaClient.request(
+    `
       query PostsQuery {
         postConnection {
           edges {
@@ -66,15 +66,15 @@ export async function fetchAllPosts() {
         }
       }
     `,
-    variables: {} // Adding empty variables object as required by the request method
-  });
+    {} // Empty variables object for the query that doesn't need variables
+  );
 }
 
 // Example query for site settings
 export async function fetchSiteSettings(relativePath: string = 'site.json') {
   const variables = { relativePath };
-  return await tinaClient.request({
-    query: `
+  return await tinaClient.request(
+    `
       query SettingsQuery($relativePath: String!) {
         settings(relativePath: $relativePath) {
           header {
@@ -93,5 +93,5 @@ export async function fetchSiteSettings(relativePath: string = 'site.json') {
       }
     `,
     variables
-  });
+  );
 }
