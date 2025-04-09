@@ -1,8 +1,0 @@
-
-Update your package.json scripts to include:
-
-"scripts": {
-  "dev": "tinacms dev -c \"npm run dev\"",
-  "build": "tinacms build && npm run build",
-  "start": "npm run start"
-}
