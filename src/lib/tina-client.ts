@@ -21,7 +21,7 @@ export async function fetchPageData(relativePath: string) {
         }
       }
     `,
-    variables
+    { variables }
   );
 }
 
@@ -40,7 +40,7 @@ export async function fetchPostData(relativePath: string) {
         }
       }
     `,
-    variables
+    { variables }
   );
 }
 
@@ -66,7 +66,7 @@ export async function fetchAllPosts() {
         }
       }
     `,
-    {} // Empty variables object for the query that doesn't need variables
+    { variables: {} } // Empty variables object wrapped in the expected format
   );
 }
 
@@ -92,6 +92,6 @@ export async function fetchSiteSettings(relativePath: string = 'site.json') {
         }
       }
     `,
-    variables
+    { variables }
   );
 }
