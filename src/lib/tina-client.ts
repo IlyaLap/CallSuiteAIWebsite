@@ -6,12 +6,13 @@ export const tinaClient = createClient({
   apiUrl: import.meta.env.VITE_TINA_CLIENT_URL || 'http://localhost:4001/graphql',
   // We need to use the correct property for authentication based on the TinaCMS API
   clientId: import.meta.env.VITE_TINA_CLIENT_ID || '',
+  tinaGraphQLVersion: 'v1', // Adding the required tinaGraphQLVersion property
 });
 
 // Example query function
 export async function fetchPageData(relativePath: string) {
   const variables = { relativePath };
-  const response = await tinaClient.request({
+  return await tinaClient.request({
     query: `
       query PageQuery($relativePath: String!) {
         page(relativePath: $relativePath) {
@@ -22,13 +23,12 @@ export async function fetchPageData(relativePath: string) {
     `,
     variables
   });
-  return response;
 }
 
 // Example blog post query function
 export async function fetchPostData(relativePath: string) {
   const variables = { relativePath };
-  const response = await tinaClient.request({
+  return await tinaClient.request({
     query: `
       query PostQuery($relativePath: String!) {
         post(relativePath: $relativePath) {
@@ -42,12 +42,11 @@ export async function fetchPostData(relativePath: string) {
     `,
     variables
   });
-  return response;
 }
 
 // Example query for all blog posts
 export async function fetchAllPosts() {
-  const response = await tinaClient.request({
+  return await tinaClient.request({
     query: `
       query PostsQuery {
         postConnection {
@@ -69,13 +68,12 @@ export async function fetchAllPosts() {
     `,
     variables: {} // Adding empty variables object as required by the request method
   });
-  return response;
 }
 
 // Example query for site settings
 export async function fetchSiteSettings(relativePath: string = 'site.json') {
   const variables = { relativePath };
-  const response = await tinaClient.request({
+  return await tinaClient.request({
     query: `
       query SettingsQuery($relativePath: String!) {
         settings(relativePath: $relativePath) {
@@ -96,5 +94,4 @@ export async function fetchSiteSettings(relativePath: string = 'site.json') {
     `,
     variables
   });
-  return response;
 }
