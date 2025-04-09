@@ -14,7 +14,7 @@ import { Helmet } from "react-helmet";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" data-sb-object-id="home-page">
       <Helmet>
         <title>CallSuite.ai - AI Phone Assistant for Service Businesses</title>
         <meta name="description" content="CallSuite.ai is an AI phone assistant that handles your business calls 24/7, ensuring you never miss an opportunity. Perfect for service businesses." />
@@ -32,7 +32,7 @@ const Index = () => {
       </Helmet>
       
       <Header />
-      <main className="flex-grow">
+      <main className="flex-grow" data-sb-object-id="main-content">
         <HeroSection />
         <ProblemSolutionSection />
         <HowItWorksSection />

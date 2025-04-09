@@ -29,7 +29,7 @@ const Blog = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" data-sb-object-id="blog-page">
       <Helmet>
         <title>CallSuite.ai Blog - AI Phone Assistant for Service Businesses</title>
         <meta name="description" content="Explore the latest articles, insights, and trends on AI technology for service businesses at the CallSuite.ai blog." />
@@ -49,13 +49,13 @@ const Blog = () => {
       <Header />
       <main className="flex-grow">
         {/* Blog Hero */}
-        <section className="bg-gradient-to-r from-primary/10 to-primary/5 pt-20 pb-16">
+        <section className="bg-gradient-to-r from-primary/10 to-primary/5 pt-20 pb-16" data-sb-object-id="blog-hero">
           <div className="container-wide">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="heading-xl text-darkSlate mb-6">
+              <h1 className="heading-xl text-darkSlate mb-6" data-sb-field-path="heading">
                 CallSuite.ai Blog
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
+              <p className="text-xl text-gray-600 mb-8" data-sb-field-path="description">
                 Insights, tips and strategies to help service professionals grow their business
               </p>
               
@@ -65,6 +65,7 @@ const Blog = () => {
                   type="search" 
                   placeholder="Search articles..." 
                   className="pl-10 w-full"
+                  data-sb-field-path="searchPlaceholder"
                 />
               </div>
             </div>
@@ -72,13 +73,13 @@ const Blog = () => {
         </section>
         
         {/* Featured Post */}
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-white" data-sb-object-id="featured-post">
           <div className="container-wide">
-            <h2 className="heading-lg mb-8">Featured Article</h2>
+            <h2 className="heading-lg mb-8" data-sb-field-path="featuredTitle">Featured Article</h2>
             
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="aspect-video bg-gray-100 flex items-center justify-center overflow-hidden">
+                <div className="aspect-video bg-gray-100 flex items-center justify-center overflow-hidden" data-sb-field-path="featuredPost.image">
                   <img 
                     src={featuredPost.image} 
                     alt={featuredPost.title}
@@ -88,13 +89,13 @@ const Blog = () => {
                 </div>
                 <div className="p-8 flex flex-col justify-center">
                   <div className="mb-2">
-                    <span className="inline-block bg-primary/10 text-primary text-sm font-medium rounded-full px-3 py-1">
+                    <span className="inline-block bg-primary/10 text-primary text-sm font-medium rounded-full px-3 py-1" data-sb-field-path="featuredPost.category">
                       {featuredPost.category}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-bold mb-3">{featuredPost.title}</h3>
-                  <p className="text-gray-600 mb-4">{featuredPost.excerpt}</p>
-                  <div className="flex items-center text-sm text-gray-500 mb-6">
+                  <h3 className="text-2xl font-bold mb-3" data-sb-field-path="featuredPost.title">{featuredPost.title}</h3>
+                  <p className="text-gray-600 mb-4" data-sb-field-path="featuredPost.excerpt">{featuredPost.excerpt}</p>
+                  <div className="flex items-center text-sm text-gray-500 mb-6" data-sb-field-path="featuredPost.meta">
                     <span>{featuredPost.author}</span>
                     <span className="mx-2">•</span>
                     <span>{featuredPost.date}</span>
@@ -102,7 +103,7 @@ const Blog = () => {
                     <Clock size={14} className="mr-1" />
                     <span>{featuredPost.readTime}</span>
                   </div>
-                  <Button className="w-fit" onClick={handleReadArticle}>Read Article</Button>
+                  <Button className="w-fit" onClick={handleReadArticle} data-sb-field-path="featuredPost.cta">Read Article</Button>
                 </div>
               </div>
             </div>
