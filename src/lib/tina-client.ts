@@ -1,98 +1,111 @@
 
-import { createClient } from 'tinacms';
+import { createClient } from "tinacms/dist/client";
+import { queries } from "../.tina/__generated__/types";
 
-// This client is used for querying data from TinaCMS
+// Initialize Tina client
 export const tinaClient = createClient({
-  apiUrl: import.meta.env.VITE_TINA_CLIENT_URL || 'http://localhost:4001/graphql',
-  // We need to use the correct property for authentication based on the TinaCMS API
-  clientId: import.meta.env.VITE_TINA_CLIENT_ID || '',
-  token: import.meta.env.VITE_TINA_TOKEN || '',
-  tinaGraphQLVersion: 'v1', // Required property for TinaCMS client
+  url: import.meta.env.VITE_TINA_CLIENT_URL || "",
+  clientId: import.meta.env.VITE_TINA_CLIENT_ID || "",
+  tinaGraphQLVersion: "latest",
+  queries,
 });
 
-// Example query function
-export async function fetchPageData(relativePath: string) {
-  const variables = { relativePath };
-  return await tinaClient.request(
-    `
-      query PageQuery($relativePath: String!) {
-        page(relativePath: $relativePath) {
-          body
-          title
+// Function to fetch page data
+export const fetchPageData = async (relativePath: string) => {
+  try {
+    const result = await tinaClient.request({
+      query: `
+        query PageQuery($relativePath: String!) {
+          page(relativePath: $relativePath) {
+            title
+            body
+          }
         }
-      }
-    `,
-    { variables }
-  );
-}
+      `,
+      variables: { relativePath }
+    });
+    
+    return result;
+  } catch (error) {
+    console.error("Error fetching page data:", error);
+    throw error;
+  }
+};
 
-// Example blog post query function
-export async function fetchPostData(relativePath: string) {
-  const variables = { relativePath };
-  return await tinaClient.request(
-    `
-      query PostQuery($relativePath: String!) {
-        post(relativePath: $relativePath) {
-          title
-          date
-          excerpt
-          featuredImage
-          body
+// Function to fetch blog post data
+export const fetchPostData = async (relativePath: string) => {
+  try {
+    const result = await tinaClient.request({
+      query: `
+        query PostQuery($relativePath: String!) {
+          post(relativePath: $relativePath) {
+            title
+            date
+            author
+            body
+          }
         }
-      }
-    `,
-    { variables }
-  );
-}
+      `,
+      variables: { relativePath }
+    });
+    
+    return result;
+  } catch (error) {
+    console.error("Error fetching post data:", error);
+    throw error;
+  }
+};
 
-// Example query for all blog posts
-export async function fetchAllPosts() {
-  return await tinaClient.request(
-    `
-      query PostsQuery {
-        postConnection {
-          edges {
-            node {
-              title
-              date
-              excerpt
-              featuredImage
-              _sys {
-                filename
-                basename
-                relativePath
+// Function to fetch all blog posts
+export const fetchAllPosts = async () => {
+  try {
+    const result = await tinaClient.request({
+      query: `
+        query AllPostsQuery {
+          postConnection {
+            edges {
+              node {
+                title
+                date
+                author
+                _sys {
+                  filename
+                }
               }
             }
           }
         }
-      }
-    `,
-    { variables: {} }
-  );
-}
+      `,
+      variables: {}
+    });
+    
+    return result;
+  } catch (error) {
+    console.error("Error fetching all posts:", error);
+    throw error;
+  }
+};
 
-// Example query for site settings
-export async function fetchSiteSettings(relativePath: string = 'site.json') {
-  const variables = { relativePath };
-  return await tinaClient.request(
-    `
-      query SettingsQuery($relativePath: String!) {
-        settings(relativePath: $relativePath) {
-          header {
-            siteName
-            tagline
-            logo
-          }
-          footer {
-            copyrightText
-            socialLinks {
-              platform
-              url
-            }
+// Function to fetch blog post data by slug
+export const fetchPostBySlug = async (relativePath: string) => {
+  try {
+    const result = await tinaClient.request({
+      query: `
+        query PostBySlugQuery($relativePath: String!) {
+          post(relativePath: $relativePath) {
+            title
+            date
+            author
+            body
           }
         }
-      }
-    `,
-    { variables }
-  );
-}
+      `,
+      variables: { relativePath }
+    });
+    
+    return result;
+  } catch (error) {
+    console.error("Error fetching post by slug:", error);
+    throw error;
+  }
+};

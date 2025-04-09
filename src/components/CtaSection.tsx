@@ -122,54 +122,31 @@ const CtaSection = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" name="phone" placeholder="(555) 123-4567" required />
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" name="email" type="email" placeholder="Your Email" required />
                   </div>
                   
                   <div>
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" type="email" name="email" placeholder="you@example.com" required />
+                    <Label htmlFor="phone">Phone</Label>
+                    <Input id="phone" name="phone" placeholder="Your Phone" required />
                   </div>
                   
                   <div>
-                    <Label htmlFor="business-type">Business Type</Label>
-                    <select 
-                      id="business-type" 
-                      name="business-type"
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      required
-                      defaultValue=""
-                    >
-                      <option value="" disabled>Select Business Type</option>
-                      <option value="plumbing">Plumbing</option>
-                      <option value="hvac">HVAC</option>
-                      <option value="electrical">Electrical</option>
-                      <option value="landscaping">Landscaping</option>
-                      <option value="cleaning">Cleaning</option>
-                      <option value="other">Other</option>
-                    </select>
+                    <Label htmlFor="industry">Industry</Label>
+                    <Input id="industry" name="industry" placeholder="Your Industry" />
                   </div>
                   
                   <div>
-                    <Label htmlFor="extra-info">Extra Information</Label>
-                    <Textarea 
-                      id="extra-info" 
-                      name="extra-info" 
-                      placeholder="Tell us about your current challenges, goals, and problems you're looking to solve with CallSuite.ai"
-                      className="min-h-24 text-gray-500"
-                    />
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea id="message" name="message" placeholder="Tell us about your business needs..." rows={4} />
                   </div>
                 </div>
                 
-                <Button 
-                  className="w-full bg-accent hover:bg-accent/90 text-white font-medium py-3" 
-                  type="submit"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Submitting..." : "Schedule Your Demo Now"}
+                <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending..." : "Schedule Demo"}
                 </Button>
                 
-                <p className="text-center text-sm text-gray-500 mt-4">
+                <p className="text-xs text-gray-500 text-center mt-4">
                   By submitting this form, you agree to our Terms of Service and Privacy Policy.
                 </p>
               </div>
