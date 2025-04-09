@@ -4,6 +4,7 @@ import { createClient } from 'tinacms';
 // This client is used for querying data from TinaCMS
 export const tinaClient = createClient({
   apiUrl: import.meta.env.VITE_TINA_CLIENT_URL || 'http://localhost:4001/graphql',
+  // Use the correct property based on TinaCMS client API
   token: import.meta.env.VITE_TINA_TOKEN || '',
 });
 
@@ -66,7 +67,7 @@ export async function fetchAllPosts() {
         }
       }
     `,
-    variables: {}  // Adding empty variables object as second argument
+    variables: {} // Adding empty variables object as required by the request method
   });
   return response;
 }
