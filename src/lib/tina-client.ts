@@ -3,7 +3,7 @@ import { createClient } from 'tinacms';
 
 // This client is used for querying data from TinaCMS
 export const tinaClient = createClient({
-  apiURL: import.meta.env.VITE_TINA_CLIENT_URL || 'http://localhost:4001/graphql',
+  apiUrl: import.meta.env.VITE_TINA_CLIENT_URL || 'http://localhost:4001/graphql',
   tokenBrowser: import.meta.env.VITE_TINA_TOKEN || '',
 });
 
@@ -66,6 +66,7 @@ export async function fetchAllPosts() {
         }
       }
     `,
+    variables: {}  // Adding empty variables object as second argument
   });
   return response;
 }
