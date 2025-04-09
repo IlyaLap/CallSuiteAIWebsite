@@ -3,9 +3,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-
-// Add TinaCMS client initialization if needed
-// import { TinaEditProvider } from "tinacms/dist/edit-state";
+import TinaProvider from './components/TinaProvider';
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error('Failed to find the root element');
@@ -13,8 +11,9 @@ if (!rootElement) throw new Error('Failed to find the root element');
 const root = createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    {/* Wrap with TinaEditProvider if needed for visual editing */}
-    <App />
+    <TinaProvider>
+      <App />
+    </TinaProvider>
   </React.StrictMode>
 );
 

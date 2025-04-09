@@ -3,8 +3,8 @@ import { defineConfig } from "tinacms";
 
 export default defineConfig({
   branch: process.env.TINA_BRANCH || process.env.HEAD || "main",
-  clientId: process.env.VITE_TINA_CLIENT_ID || "",
-  token: process.env.VITE_TINA_TOKEN || "",
+  clientId: process.env.VITE_TINA_CLIENT_ID || "30c6b623-6e1d-4a36-8d0b-ccbde5a2aa77", // From Tina Cloud
+  token: process.env.VITE_TINA_TOKEN || "56e8ec722a00dc840ed5977ef43d06ac9d2f49f2", // From Tina Cloud
   build: {
     outputFolder: "admin",
     publicFolder: "public",
