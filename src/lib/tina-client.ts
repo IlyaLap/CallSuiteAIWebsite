@@ -1,11 +1,10 @@
 
 import { createClient } from "tinacms/dist/client";
 
-// Initialize Tina client
+// Initialize Tina client with correct parameters
 export const tinaClient = createClient({
   url: import.meta.env.VITE_TINA_CLIENT_URL || "",
   token: import.meta.env.VITE_TINA_TOKEN || "",
-  tinaGraphQLVersion: "latest",
 });
 
 // Function to fetch page data
