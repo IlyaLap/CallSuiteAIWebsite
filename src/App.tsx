@@ -41,6 +41,7 @@ const App: React.FC = () => {
             <Route path="/terms" element={<Terms />} />
             <Route path="/contact" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/admin/*" element={<div>TinaCMS Admin Panel Loading...</div>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

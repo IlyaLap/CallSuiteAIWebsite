@@ -3,6 +3,12 @@
   publish = "dist"
   command = "npm run build"
 
+# Set up the admin path for TinaCMS
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
 # Handle SPA redirects for React Router
 [[redirects]]
   from = "/*"

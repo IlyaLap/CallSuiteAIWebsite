@@ -22,16 +22,16 @@ const HeroSection = () => {
   };
   
   return (
-    <section className="relative bg-gradient-to-r from-primary/10 to-primary/5 overflow-hidden">
+    <section className="relative bg-gradient-to-r from-primary/10 to-primary/5 overflow-hidden" data-sb-object-id="hero-section">
       <div className="container-wide flex flex-col-reverse lg:flex-row items-center py-16 md:py-24">
         {/* Hero Content */}
         <div className="w-full lg:w-1/2 pt-10 lg:pt-0">
           <div className="animate-fade-in">
-            <h1 className="heading-xl text-darkSlate mb-6">
+            <h1 className="heading-xl text-darkSlate mb-6" data-sb-field-path="title">
               Never Miss Another Call. <span className="text-primary">Book More Jobs.</span> Zero Hassle.
             </h1>
             
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-gray-600 mb-8" data-sb-field-path="subtitle">
               The AI phone assistant built specifically for service professionals
             </p>
             
@@ -47,7 +47,7 @@ const HeroSection = () => {
         </div>
         
         {/* Hero Video */}
-        <div className="w-full lg:w-1/2 lg:pl-12">
+        <div className="w-full lg:w-1/2 lg:pl-12" data-sb-field-path="video">
           <div className="relative aspect-video bg-black/5 rounded-lg shadow-xl overflow-hidden">
             <iframe 
               className="absolute inset-0 w-full h-full" 

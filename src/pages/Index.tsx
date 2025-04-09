@@ -12,9 +12,13 @@ import FaqSection from "@/components/FaqSection";
 import CtaSection from "@/components/CtaSection";
 import { Helmet } from "react-helmet";
 
+// This component could later be enhanced with TinaCMS data fetching
 const Index = () => {
+  // In a real implementation, you would fetch page data from TinaCMS here
+  // const { data, isLoading } = useTina({ query: ... });
+  
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" data-sb-object-id="home-page">
       <Helmet>
         <title>CallSuite.ai - AI Phone Assistant for Service Businesses</title>
         <meta name="description" content="CallSuite.ai is an AI phone assistant that handles your business calls 24/7, ensuring you never miss an opportunity. Perfect for service businesses." />
