@@ -12,6 +12,7 @@ import Features from "./pages/Features";
 import Industries from "./pages/Industries";
 import Resources from "./pages/Resources";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Contact from "./pages/Contact";
@@ -35,6 +36,7 @@ const App: React.FC = () => {
             <Route path="/industries" element={<Industries />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/how-ai-is-transforming-service-industry-2025" element={<BlogPost />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/contact" element={<Contact />} />

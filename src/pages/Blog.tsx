@@ -1,4 +1,3 @@
-
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,17 +5,22 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Clock, Search, Tag } from "lucide-react";
+import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 
 const Blog = () => {
+  const navigate = useNavigate();
+  
   // Sample blog post data
   const featuredPost = {
-    title: "How AI is Transforming the Service Industry in 2023",
-    excerpt: "Discover the latest trends and innovations in AI technology for service businesses, and how automated call handling is becoming essential for growth.",
+    title: "How AI is Transforming the Service Industry in 2025",
+    excerpt: "Discover how AI technology is revolutionizing service businesses in 2025, from automated customer interactions to predictive maintenance and personalized service delivery.",
     category: "Industry Trends",
-    author: "Michael Smith",
-    date: "October 15, 2023",
+    author: "Hamish Havig",
+    date: "April 9, 2025",
     readTime: "7 min read",
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80",
+    slug: "how-ai-is-transforming-service-industry-2025"
   };
   
   const blogPosts = [
@@ -76,7 +80,6 @@ const Blog = () => {
     }
   ];
   
-  // Sample categories
   const categories = [
     "Business Growth", 
     "Industry Trends", 
@@ -86,8 +89,28 @@ const Blog = () => {
     "Technology"
   ];
   
+  const handleReadArticle = () => {
+    navigate('/blog/how-ai-is-transforming-service-industry-2025');
+  };
+  
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>CallSuite.ai Blog - AI Phone Assistant for Service Businesses</title>
+        <meta name="description" content="Explore the latest articles, insights, and trends on AI technology for service businesses at the CallSuite.ai blog." />
+        <meta name="keywords" content="AI blog, service industry blog, AI technology, business growth, customer service" />
+        <meta property="og:title" content="CallSuite.ai Blog - AI Phone Assistant for Service Businesses" />
+        <meta property="og:description" content="Explore the latest articles, insights, and trends on AI technology for service businesses at the CallSuite.ai blog." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://callsuite.ai/blog" />
+        <meta property="og:image" content="https://callsuite.ai/og-image.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="CallSuite.ai Blog - AI Phone Assistant for Service Businesses" />
+        <meta name="twitter:description" content="Explore the latest articles, insights, and trends on AI technology for service businesses at the CallSuite.ai blog." />
+        <meta name="twitter:image" content="https://callsuite.ai/og-image.png" />
+        <link rel="canonical" href="https://callsuite.ai/blog" />
+      </Helmet>
+      
       <Header />
       <main className="flex-grow">
         {/* Blog Hero */}
@@ -120,8 +143,13 @@ const Blog = () => {
             
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="aspect-video bg-gray-100 flex items-center justify-center">
-                  <p className="text-gray-500">Featured post image</p>
+                <div className="aspect-video bg-gray-100 flex items-center justify-center overflow-hidden">
+                  <img 
+                    src={featuredPost.image} 
+                    alt={featuredPost.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="p-8 flex flex-col justify-center">
                   <div className="mb-2">
@@ -139,7 +167,7 @@ const Blog = () => {
                     <Clock size={14} className="mr-1" />
                     <span>{featuredPost.readTime}</span>
                   </div>
-                  <Button className="w-fit">Read Article</Button>
+                  <Button className="w-fit" onClick={handleReadArticle}>Read Article</Button>
                 </div>
               </div>
             </div>
