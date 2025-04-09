@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Industries = () => {
   const navigate = useNavigate();
@@ -72,6 +73,68 @@ const Industries = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Industries We Serve | CallSuite.ai</title>
+        <meta name="description" content="CallSuite.ai provides tailored AI phone assistant solutions for multiple service industries including plumbing, HVAC, electrical, roofing, and more." />
+        <meta name="keywords" content="service industry AI, plumbing AI assistant, HVAC call handling, electrical service AI, roofing business calls" />
+        <meta property="og:title" content="Industries We Serve | CallSuite.ai" />
+        <meta property="og:description" content="CallSuite.ai provides tailored AI phone assistant solutions for multiple service industries including plumbing, HVAC, electrical, roofing, and more." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://callsuite.ai/industries" />
+        <meta property="og:image" content="https://callsuite.ai/og-image.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Industries We Serve | CallSuite.ai" />
+        <meta name="twitter:description" content="CallSuite.ai provides tailored AI phone assistant solutions for multiple service industries including plumbing, HVAC, electrical, roofing, and more." />
+        <meta name="twitter:image" content="https://callsuite.ai/og-image.png" />
+        <link rel="canonical" href="https://callsuite.ai/industries" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": "Industries We Serve | CallSuite.ai",
+              "description": "CallSuite.ai provides tailored AI phone assistant solutions for multiple service industries including plumbing, HVAC, electrical, roofing, and more.",
+              "publisher": {
+                "@type": "Organization",
+                "name": "CallSuite.ai",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://callsuite.ai/logo.png"
+                }
+              },
+              "mainEntity": {
+                "@type": "ItemList",
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Plumbing",
+                    "description": "Streamline emergency plumbing service calls, schedule maintenance, and handle complex water system inquiries with our intelligent AI assistant."
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "HVAC",
+                    "description": "Manage AC repair calls, heating system inquiries, and seasonal maintenance requests. The AI can prioritize emergency calls during extreme weather conditions."
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Electrical",
+                    "description": "Address power outages, electrical repairs, and installation requests. Our AI can identify urgent safety issues and prioritize dispatch accordingly."
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": "Roofing",
+                    "description": "Efficiently manage storm damage inquiries, schedule comprehensive roof inspections, and book repair services with intelligent prioritization."
+                  }
+                ]
+              }
+            }
+          `}
+        </script>
+      </Helmet>
       <Header />
       <main className="flex-grow">
         <section className="bg-gradient-to-r from-primary/10 to-primary/5 pt-20 pb-16">
@@ -97,6 +160,7 @@ const Industries = () => {
                       src={industry.image} 
                       alt={`${industry.name} industry`} 
                       className="w-full h-full object-cover" 
+                      loading="lazy"
                     />
                   </div>
                   <div className="p-6 flex flex-col">

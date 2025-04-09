@@ -3,30 +3,10 @@
 User-agent: *
 Allow: /
 
-# Main pages
-Allow: /index.html
-Allow: /how-it-works
-Allow: /features
-Allow: /industries
-Allow: /resources
-Allow: /blog
-Allow: /contact
-Allow: /privacy
-Allow: /terms
-
-# Block certain files and directories
-Disallow: /private/
-Disallow: /admin/
-Disallow: *.pdf
-Disallow: /cgi-bin/
-
 # Sitemaps
 Sitemap: https://callsuite.ai/sitemap.xml
 
-# Crawl delay suggestion
-Crawl-delay: 5
-
-# Common search engines
+# Common search engines with specific rules
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 2
@@ -49,13 +29,3 @@ Crawl-delay: 5
 User-agent: Yandex
 Allow: /
 Crawl-delay: 5
-
-# Social media bots
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
