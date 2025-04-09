@@ -1,13 +1,11 @@
 
 import { createClient } from "tinacms/dist/client";
-import { queries } from "../.tina/__generated__/types";
 
 // Initialize Tina client
 export const tinaClient = createClient({
   url: import.meta.env.VITE_TINA_CLIENT_URL || "",
-  clientId: import.meta.env.VITE_TINA_CLIENT_ID || "",
+  token: import.meta.env.VITE_TINA_TOKEN || "",
   tinaGraphQLVersion: "latest",
-  queries,
 });
 
 // Function to fetch page data
