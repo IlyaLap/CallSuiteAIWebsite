@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,20 +17,11 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
-import { initBuilder } from "./lib/builder";
-import BuilderPage from "./components/BuilderPage";
-import BuilderBlog from "./components/BuilderBlog";
-import BuilderResource from "./components/BuilderResource";
 
 // Create a client
 const queryClient = new QueryClient();
 
 const App: React.FC = () => {
-  useEffect(() => {
-    // Initialize Builder.io
-    initBuilder();
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -49,12 +40,6 @@ const App: React.FC = () => {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/contact" element={<Contact />} />
-            
-            {/* Builder.io specific routes */}
-            <Route path="/builder-blog/:slug" element={<BuilderBlog />} />
-            <Route path="/builder-resources/:slug" element={<BuilderResource />} />
-            <Route path="/builder-page/*" element={<BuilderPage />} />
-            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
